@@ -12,10 +12,14 @@ class Materials(MaterialAdd):
 
 materials = []
 
-@app.post("/materials")
+@app.post("/materials_add")
 
 
 async def Material_Add(
     material: Annotated[MaterialAdd, Depends()]):
     materials.append (material)
     return{"ok": True}
+
+@app.get("/materials")
+def getmatterials():
+    return materials
