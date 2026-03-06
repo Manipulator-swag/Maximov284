@@ -23,3 +23,9 @@ async def Material_Add(
 @app.get("/materials")
 def getmatterials():
     return materials
+
+workshops = []
+
+@app.get("/workshops")
+def getworkshops():
+    return workshops
