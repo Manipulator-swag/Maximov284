@@ -29,3 +29,9 @@ workshops = []
 @app.get("/workshops")
 def getworkshops():
     return workshops
+
+products = []
+
+@app.get("/products")
+def getproducts():
+    return products
