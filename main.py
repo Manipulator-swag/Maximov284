@@ -1,7 +1,14 @@
-from typing import Annotated, Optional
-from fastapi import Depends, FastAPI
-from pyndatic import Basemodel
-app = FastAPI()
+from fastapi import Depends, FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from sqlalchemy.orm import Session
+from database import get_db
+from sqlalchemy import text, Select
+from fastapi.templating import Jinja2Templates
+
+from Maximov284.models import ProductWorkshops
+
+
+
 class MaterialAdd(Basemodel()):
     material_type: str
     loss_percent: float
