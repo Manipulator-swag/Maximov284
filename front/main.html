@@ -1,0 +1,26 @@
+<HTML>
+    <head>
+        <title>список товаров</title>
+        <link rel="icon", href="/pictures/Комфорт.ico" type="image/x-icon">
+    </head>
+<body>
+    <img src="/pictures/Комфорт.png" style="height:200px; width:auto">
+    <h1>Список продуктов</h1>
+    <button onclick="window.location.assign('/add_product')" style="color:#355CBD">добавить товар</button>
+    <div class="products">
+       {% for product in data.products %}
+        <div class="product_div" style="position:relative;margin:2%; border:2px solid black; background-color: #D2DFFF;">
+            <p style="font-family:Candara; margin-left:5%">тип: {{product.product_type}} | название: {{products.product_name}}</p>
+            <p style="font-family:Candara; margin-left:5%">артикул: {products.articul}</p>
+            <p style="font-family:Candara; margin-left:5%">стоимость для партнера: {{product.min_partner_cost}}</p>
+            <p style="font-family:Candara; margin-left:5%">основной материал: {{product.}}</p>
+            <p style="font-family:Candara; position:absolute; right:0; top:0; margin-right: 5%;">требуется часов: {{products.hours}}</p>
+            <a href="/update_product/{{products.product_id|int}}" style="margin-left:5%">изменить продукт</a>
+            <a href="/workshops/{{products.product_id|int}}">посмотреть список цехов</a>
+        </div>
+       {%endfor%} 
+    </div>
+    
+</body>
+
+</HTML>
