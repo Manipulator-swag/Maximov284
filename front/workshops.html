@@ -14,7 +14,7 @@
             {% for w in data %}
             <div style="border:2px solid black;margin:2%;padding:10px">
                 <p>название цеха: {{w.workshop_name or '-'}}</p>
-                <p>время изготовления: {{w.make_time or '0'}} ч.</p>
+                <p>часов: {{ "%.1f"|format(w.make_time|float) }} ч.</p>
                 <p>количество работников: {{w.population or '-'}}</p>
             </div>
             {% endfor %}

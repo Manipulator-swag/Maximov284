@@ -15,9 +15,9 @@
             <div style="border:2px solid black;margin:2%;padding:10px">
                 <p>тип: {{p.product_type or '-'}} | название: {{p.product_name or '-'}}</p>
                 <p>артикул: {{p.articul or '-'}}</p>
-                <p>цена: {{p.min_cost_for_partner or '-'}}</p>
+                <p>цена: {{ "%.2f"|format(p.min_cost_for_partner|float) }}</p>
                 <p>материал: {{p.main_material or '-'}}</p>
-                <p>часов: {{p.making_time or '0'}}</p>
+                <p>часов: {{ "%.1f"|format(p.making_time|float) }} ч.</p>
                 <a href="/update_product/{{p.product_id}}">изменить</a>
                 <a href="/workshops/{{p.product_id}}">цеха</a>
                 <a href="/delete_product/{{p.product_id}}" style="color:red" onclick="return confirm('удалить товар?')">удалить</a>
