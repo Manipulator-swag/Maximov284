@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>удаление товара</title>
+    <link rel="icon" href="/pictures/Комфорт.ico" type="image/x-icon">
+</head>
+<body>
+    <img src="/pictures/Комфорт.png" style="height:200px;width:auto">
+    <h1>удаление товара</h1>
+    
+    <div style="border:2px solid red;margin:2%;padding:20px">
+        <p>вы уверены, что хотите удалить товар "{{ product_name }}"?</p>
+        <p style="color:red">это действие нельзя отменить!</p>
+        
+        <form action="/delete_product/{{ product_id }}" method="post">
+            <button type="submit" style="background-color:red;color:white">да, удалить</button>
+            <button type="button" onclick="window.location.assign('/')">отмена</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,21 +1,26 @@
-<HTML>
-    <head>
-        <title>список мастерских</title>
-        <link rel="icon", href="/pictures/Комфорт.ico" type="image/x-icon">
-    </head>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>список цехов</title>
+    <link rel="icon" href="/pictures/Комфорт.ico" type="image/x-icon">
+</head>
 <body>
-    <h1>список мастерских</h1>
-    <button onclick="window.location.assign('/')" style="color:black">назад</button>
-    <div class="products">
-       {% for workshop in data %}
-        <div class="product_div" style="position:relative;margin:2%; border:2px solid black; background-color: #D2DFFF;">
-            <p style="font-family:Candara; margin-left:5%">название: {{workshop.workshop_name}}</p>
-            <p style="font-family:Candara; margin-left:5%">количество часов: {{workshop.making_time}}</p>
-            <p style="font-family:Candara; margin-left:5%">колчество людей: {{workshop.population}}</p>
-        </div>
-       {%endfor%} 
-    </div>
+    <img src="/pictures/Комфорт.png" style="height:200px;width:auto">
+    <h1>список цехов</h1>
+    <button onclick="window.location.assign('/')">назад к товарам</button>
     
+    <div>
+        {% if data %}
+            {% for w in data %}
+            <div style="border:2px solid black;margin:2%;padding:10px">
+                <p>название цеха: {{w.workshop_name or '-'}}</p>
+                <p>время изготовления: {{w.make_time or '0'}} ч.</p>
+                <p>количество работников: {{w.population or '-'}}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>цехи не найдены</p>
+        {% endif %}
+    </div>
 </body>
-
-</HTML>
+</html>

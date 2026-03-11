@@ -2,6 +2,7 @@ from database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, DECIMAL
 from sqlalchemy.orm import relationship
 
+
 class material_type(Base):
     __tablename__ = "material_type"
     id = Column(Integer, primary_key=True)
@@ -46,12 +47,14 @@ class product_workshops(Base):
 class products(Base):
     __tablename__ = "products"
     id = Column(Integer, primary_key=True)
-    product_type = Column(Integer, ForeignKey("product_types.id"), nullable=False)  # исправлено имя
+    product_type = Column(Integer, ForeignKey("product_types.id"), nullable=False)
     product_name = Column(String)
     articul = Column(Integer)
     min_cost_for_partner = Column(DECIMAL)
-    main_material= Column(Integer, ForeignKey("material_type.id"), nullable=False)  # переименовано для ясности
+    main_material= Column(Integer, ForeignKey("material_type.id"), nullable=False)
 
     product_type_id = relationship('product_types', back_populates='products')
     material = relationship('material_type', back_populates='products')
     product_workshops = relationship('product_workshops', back_populates='product')
+
+
