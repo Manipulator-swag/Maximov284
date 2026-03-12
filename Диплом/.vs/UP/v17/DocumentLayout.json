@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Slava\\source\\repos\\UP\\",
+  "WorkspaceRootPath": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\source\\repos\\up\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\source\\repos\\up\\wwwroot\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:wwwroot\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\source\\repos\\up\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\source\\repos\\up\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0443\u043F \u043D\u0430\u0445\u0443\u0439\\maximov284\\\u0434\u0438\u043F\u043B\u043E\u043C\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\source\\repos\\up\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0443\u043F \u043D\u0430\u0445\u0443\u0439\\maximov284\\\u0434\u0438\u043F\u043B\u043E\u043C\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0443\u043F \u043D\u0430\u0445\u0443\u0439\\maximov284\\\u0434\u0438\u043F\u043B\u043E\u043C\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\source\\repos\\up\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0443\u043F \u043D\u0430\u0445\u0443\u0439\\maximov284\\\u0434\u0438\u043F\u043B\u043E\u043C\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0443\u043F \u043D\u0430\u0445\u0443\u0439\\maximov284\\\u0434\u0438\u043F\u043B\u043E\u043C\\wwwroot\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:wwwroot\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|c:\\users\\slava\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0443\u043F \u043D\u0430\u0445\u0443\u0439\\maximov284\\\u0434\u0438\u043F\u043B\u043E\u043C\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2EC6F44B-E13C-48DD-AE41-F906CBD5E0F9}|UP.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 311,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,72 +42,76 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "login.html",
-              "DocumentMoniker": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\login.html",
+              "DocumentMoniker": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\wwwroot\\login.html",
               "RelativeDocumentMoniker": "wwwroot\\login.html",
-              "ToolTip": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\login.html",
+              "ToolTip": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\wwwroot\\login.html",
               "RelativeToolTip": "wwwroot\\login.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-12-10T17:14:57.948Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Slava\\source\\repos\\UP\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Slava\\source\\repos\\UP\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAIwJ0AAABcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T14:03:22.965Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ApplicationContext.cs",
-              "DocumentMoniker": "C:\\Users\\Slava\\source\\repos\\UP\\ApplicationContext.cs",
-              "RelativeDocumentMoniker": "ApplicationContext.cs",
-              "ToolTip": "C:\\Users\\Slava\\source\\repos\\UP\\ApplicationContext.cs",
-              "RelativeToolTip": "ApplicationContext.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowCUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T10:06:07.96Z"
+              "WhenOpened": "2025-12-10T17:14:57.948Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAowMkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T14:03:22.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationContext.cs",
+              "DocumentMoniker": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\ApplicationContext.cs",
+              "RelativeDocumentMoniker": "ApplicationContext.cs",
+              "ToolTip": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\ApplicationContext.cs*",
+              "RelativeToolTip": "ApplicationContext.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T10:06:07.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\index.html",
+              "DocumentMoniker": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "wwwroot\\index.html",
-              "ToolTip": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\wwwroot\\index.html",
               "RelativeToolTip": "wwwroot\\index.html",
-              "ViewState": "AgIAAMoDAAAAAAAAAAAQwNwDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALsDAAAAAAAAAAAQwN0DAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2024-12-14T15:47:04.79Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Models.cs",
-              "DocumentMoniker": "C:\\Users\\Slava\\source\\repos\\UP\\Models.cs",
+              "DocumentMoniker": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\Models.cs",
               "RelativeDocumentMoniker": "Models.cs",
-              "ToolTip": "C:\\Users\\Slava\\source\\repos\\UP\\Models.cs",
+              "ToolTip": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\Models.cs",
               "RelativeToolTip": "Models.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAwwCsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAA1wDwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T17:26:12.695Z"
+              "WhenOpened": "2025-12-10T17:26:12.695Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Slava\\source\\repos\\UP\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Slava\\source\\repos\\UP\\appsettings.json",
+              "ToolTip": "C:\\Users\\Slava\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0423\u041F \u043D\u0430\u0445\u0443\u0439\\Maximov284\\\u0414\u0438\u043F\u043B\u043E\u043C\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",

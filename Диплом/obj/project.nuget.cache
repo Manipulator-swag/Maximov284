@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "efb94/hIQdo=",
+  "dgSpecHash": "gf+kYF/Sx8w=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Slava\\source\\repos\\UP\\UP.csproj",
+  "projectFilePath": "C:\\Users\\Slava\\OneDrive\\Рабочий стол\\УП нахуй\\Maximov284\\Диплом\\UP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Slava\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0\\microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
     "C:\\Users\\Slava\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0\\microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",

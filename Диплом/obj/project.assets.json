@@ -836,11 +836,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Slava\\source\\repos\\UP\\UP.csproj",
+      "projectUniqueName": "C:\\Users\\Slava\\OneDrive\\Рабочий стол\\УП нахуй\\Maximov284\\Диплом\\UP.csproj",
       "projectName": "UP",
-      "projectPath": "C:\\Users\\Slava\\source\\repos\\UP\\UP.csproj",
+      "projectPath": "C:\\Users\\Slava\\OneDrive\\Рабочий стол\\УП нахуй\\Maximov284\\Диплом\\UP.csproj",
       "packagesPath": "C:\\Users\\Slava\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Slava\\source\\repos\\UP\\obj\\",
+      "outputPath": "C:\\Users\\Slava\\OneDrive\\Рабочий стол\\УП нахуй\\Maximov284\\Диплом\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
