@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тест авторизации</title>
+</head>
+<body style="text-align: center; margin-top: 100px;">
+    <h2>Тест авторизации с БД Users</h2>
+
+    <div style="margin: 20px;">
+        <input type="text" id="user" placeholder="Логин" style="padding: 10px; margin: 5px;"><br>
+        <input type="password" id="pass" placeholder="Пароль" style="padding: 10px; margin: 5px;"><br>
+        <button onclick="testAuth()" style="padding: 10px 20px; margin: 10px;">Проверить</button>
+    </div>
+
+    <div id="result" style="margin: 20px;"></div>
+
+    <script>
+    async function testAuth() {
+        const user = document.getElementById('user').value;
+        const pass = document.getElementById('pass').value;
+        const result = document.getElementById('result');
+
+        result.innerHTML = 'Проверяем...';
+        result.style.color = 'blue';
+
+        try {
+            // Отправляем запрос к вашему API
+            const response = await fetch('/api/auth/test', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: user, password: pass})
+            });
+
+            if (response.ok) {
+                result.innerHTML = '✅ Успешно! Пользователь найден в БД';
+                result.style.color = 'green';
+            } else {
+                result.innerHTML = '❌ Ошибка: Пользователь не найден';
+                result.style.color = 'red';
+            }
+        } catch (error) {
+            result.innerHTML = '❌ Ошибка соединения с сервером';
+            result.style.color = 'red';
+        }
+    }
+    </script>
+</body>
+</html>

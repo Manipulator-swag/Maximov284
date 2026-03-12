@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "Hash": "F4RDyb60nD2VKXKv4CgYhotgTBj6SQMK+3EhX6OlPVc=",
+  "Source": "UP",
+  "BasePath": "_content/UP",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "UP\\wwwroot",
+      "Source": "UP",
+      "ContentRoot": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\",
+      "BasePath": "_content/UP",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\index.html",
+      "SourceId": "UP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\",
+      "BasePath": "_content/UP",
+      "RelativePath": "index#[.{fingerprint}]?.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "16dvohqmpx",
+      "Integrity": "aXCQlk9P6mdpqW3UE4GDtkeo+VjdlyEJxCKnoQOy3fM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "index.16dvohqmpx.html",
+      "AssetFile": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45692"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aXCQlk9P6mdpqW3UE4GDtkeo+VjdlyEJxCKnoQOy3fM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 08:59:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "16dvohqmpx"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aXCQlk9P6mdpqW3UE4GDtkeo+VjdlyEJxCKnoQOy3fM="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "C:\\Users\\Slava\\source\\repos\\UP\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45692"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aXCQlk9P6mdpqW3UE4GDtkeo+VjdlyEJxCKnoQOy3fM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 08:59:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aXCQlk9P6mdpqW3UE4GDtkeo+VjdlyEJxCKnoQOy3fM="
+        }
+      ]
+    }
+  ]
+}

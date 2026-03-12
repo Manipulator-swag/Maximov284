@@ -1,0 +1,1140 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аэропорт - Управление системой</title>
+    <style>
+        body {
+            zoom: 0.9;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #eee;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            border: 1px solid #ddd;
+            border-bottom: none;
+        }
+
+            .tab.active {
+                background-color: #4CAF50;
+                color: white;
+                border-color: #4CAF50;
+            }
+
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+            .tab-content.active {
+                display: block;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            button.edit {
+                background-color: #2196F3;
+            }
+
+            button.delete {
+                background-color: #f44336;
+            }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .close:hover {
+                color: black;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            .form-group input, .form-group select, .form-group textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+        .form-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+            .controls input {
+                padding: 8px;
+                width: 300px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+        /* Добавляем стили для кнопок сортировки */
+        .sortable-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 20px;
+        }
+
+            .sortable-header:after {
+                content: "⇅";
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 12px;
+                opacity: 0.5;
+            }
+
+            .sortable-header.asc:after {
+                content: "↑";
+                opacity: 1;
+            }
+
+            .sortable-header.desc:after {
+                content: "↓";
+                opacity: 1;
+            }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+            .filter-controls label {
+                font-weight: bold;
+                white-space: nowrap;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Система управления аэропортом</h1>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('passenger')">Пассажиры</div>
+            <div class="tab" onclick="showTab('department')">Отделы</div>
+            <div class="tab" onclick="showTab('flight')">Рейсы</div>
+        </div>
+
+        <div id="passenger" class="tab-content active">
+            <div class="controls">
+                <button onclick="showAddPassengerModal()">Добавить пассажира</button>
+                <input type="text" id="searchPassenger" placeholder="Поиск..." onkeyup="searchTable('passenger')">
+            </div>
+            <div id="loadingPassenger" class="loading">Загрузка данных...</div>
+            <table id="passengerTable">
+                <thead>
+                    <tr>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'fullname')">ФИО</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'passport')">Паспорт</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'gender')">Пол</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'birthday')">Дата рождения</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'departmentid')">Отдел</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'position')">Отношение к ГТЮ</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'zayavkadate')">Дата подачи заявки</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'plannedtransportdate')">Планируемая дата</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'factdate')">Фактическая дата</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'flightid')">Рейс</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'trippurpose')">Цель поездки</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'dp')">ДП</th>
+                        <th class="sortable-header" onclick="sortTable('passenger', 'cargoweight')">Вес груза</th>
+                        <th>Примечание</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="department" class="tab-content">
+            <div class="controls">
+                <button onclick="showAddDepartmentModal()">Добавить отдел</button>
+                <input type="text" id="searchDepartment" placeholder="Поиск..." onkeyup="searchTable('department')">
+            </div>
+            <div id="loadingDepartment" class="loading">Загрузка данных...</div>
+            <table id="departmentTable">
+                <thead>
+                    <tr>
+                        <th class="sortable-header" onclick="sortTable('department', 'name')">Инициатор заявки</th>
+                        <th class="sortable-header" onclick="sortTable('department', 'organization')">Название организации для сторонних пассажиров</th>
+                        <th class="sortable-header" onclick="sortTable('department', 'phone')">Телефон</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="flight" class="tab-content">
+            <div class="controls">
+                <button onclick="showAddFlightModal()">Добавить рейс</button>
+                <input type="text" id="searchFlight" placeholder="Поиск..." onkeyup="searchTable('flight')">
+            </div>
+            <div id="loadingFlight" class="loading">Загрузка данных...</div>
+            <table id="flightTable">
+                <thead>
+                    <tr>
+                        <th class="sortable-header" onclick="sortTable('flight', 'route')">Маршрут</th>
+                        <th class="sortable-header" onclick="sortTable('flight', 'aircrafttype')">Тип ВС</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="passengerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('passengerModal')">&times;</span>
+            <h2 id="passengerModalTitle">Добавить пассажира</h2>
+            <form id="passengerForm">
+                <div class="form-group">
+                    <label for="fullname">ФИО:</label>
+                    <input type="text" id="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="passport">Паспорт:</label>
+                    <input type="text" id="passport" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Дата рождения:</label>
+                    <input type="date" id="birthday" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Пол:</label>
+                    <select id="gender" required>
+                        <option value="Мужской">Мужской</option>
+                        <option value="Женский">Женский</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="position">Отношение к ГТЮ:</label>
+                    <select id="position" name="position" required>
+                        <option value="Работник ГТЮ">Работник ГТЮ</option>
+                        <option value="Член семьи работника">Член семьи работника</option>
+                        <option value="Пенсионер ГТЮ">Пенсионер ГТЮ</option>
+                        <option value="Сторонний пассажир">Сторонний пассажир</option>
+                        <option value="Участник культ.спорт.мер.">Участник культ.спорт.мер.</option>
+                        <option value="Сопровождающий">Сопровождающий</option>
+                        <option value="груз ГТЮ">Груз ГТЮ</option>
+                        <option value="Сторонний груз">Сторонний груз</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="departmentid">Отдел:</label>
+                    <select id="departmentid" required>
+                        <option value="">Выберите отдел</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="flightid">Рейс:</label>
+                    <select id="flightid" required>
+                        <option value="">Выберите рейс</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="trippurpose">Цель поездки:</label>
+                    <select id="trippurpose" required>
+                        <option value="Вахта">Вахта</option>
+                        <option value="Служебная поездка">Служебная поездка</option>
+                        <option value="Произв.обучение">Произв.обучение</option>
+                        <option value="Отпуск">Отпуск</option>
+                        <option value="Культ.спорт.мероприятие">Культ.спорт.мероприятие</option>
+                        <option value="Конкурс проф.мастерства">Конкурс проф.мастерства</option>
+                        <option value="РВЛ">РВЛ</option>
+                        <option value="Мед.обследование">Мед.обследование</option>
+                        <option value="Работа комиссии">Работа комиссии</option>
+                        <option value="Детский отдых">Детский отдых</option>
+                        <option value="Другое">Другое</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="plannedtransportdate">Планируемая дата транспортировки:</label>
+                    <input type="date" id="plannedtransportdate">
+                </div>
+                <div class="form-group">
+                    <label for="zayavkadate">Дата подачи заявки:</label>
+                    <input type="date" id="zayavkadate">
+                </div>
+                <div class="form-group">
+                    <label for="factdate">Фактическая дата транспортировки:</label>
+                    <input type="date" id="factdate">
+                </div>
+                <div class="form-group">
+                    <label for="zayavkanumber">Номер заявки:</label>
+                    <input type="number" id="zayavkanumber">
+                </div>
+                <div class="form-group">
+                    <label for="dp">ДП:</label>
+                    <select id="dp" required>
+                        <option value="C">C</option>
+                        <option value="H">H</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cargoweight">Вес груза (кг):</label>
+                    <input type="number" id="cargoweight" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Примечания:</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('passengerModal')">Отмена</button>
+                    <button type="button" id="savePassengerBtn" onclick="savePassenger()">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="departmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('departmentModal')">&times;</span>
+            <h2 id="departmentModalTitle">Добавить отдел</h2>
+            <form id="departmentForm">
+                <div class="form-group">
+                    <label for="deptName">Название отдела:</label>
+                    <input type="text" id="deptName" required>
+                </div>
+                <div class="form-group">
+                    <label for="deptOrganization">Название организации (для сторонних пассажиров):</label>
+                    <input type="text" id="deptOrganization">
+                </div>
+                <div class="form-group">
+                    <label for="deptPhone">Телефон:</label>
+                    <input type="text" id="deptPhone">
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('departmentModal')">Отмена</button>
+                    <button type="button" id="saveDepartmentBtn" onclick="saveDepartment()">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="flightModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('flightModal')">&times;</span>
+            <h2 id="flightModalTitle">Добавить рейс</h2>
+            <form id="flightForm">
+                <div class="form-group">
+                    <label for="route">Маршрут:</label>
+                    <input type="text" id="route" required>
+                </div>
+                <div class="form-group">
+                    <label for="aircrafttype">Тип ВС:</label>
+                    <input type="text" id="aircrafttype" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('flightModal')">Отмена</button>
+                    <button type="button" id="saveFlightBtn" onclick="saveFlight()">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let passengers = [];
+        let departments = [];
+        let flights = [];
+        let currentEditId = null;
+
+        let currentSortColumn = null;
+        let currentSortDirection = 'asc';
+        let currentTableType = null;
+
+        async function loadAllData() {
+            try {
+                showLoading(true);
+
+                const [passengersRes, departmentsRes, flightsRes] = await Promise.all([
+                    fetch('/api/passenger'),
+                    fetch('/api/department'),
+                    fetch('/api/flight')
+                ]);
+
+                if (!passengersRes.ok || !departmentsRes.ok || !flightsRes.ok) {
+                    throw new Error('Ошибка загрузки данных');
+                }
+
+                passengers = await passengersRes.json();
+                departments = await departmentsRes.json();
+                flights = await flightsRes.json();
+
+                renderAllTables();
+                showLoading(false);
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                showLoading(false, error.message);
+            }
+        }
+
+        function renderAllTables() {
+            renderPassengerTable();
+            renderDepartmentTable();
+            renderFlightTable();
+        }
+
+        function renderPassengerTable() {
+            const tbody = document.querySelector('#passengerTable tbody');
+            tbody.innerHTML = '';
+
+            passengers.forEach(passenger => {
+                const department = departments.find(d => d.id === passenger.departmentid);
+                const flight = flights.find(f => f.id === passenger.flightid);
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                            <td>${passenger.fullname || '-'}</td>
+                            <td>${passenger.passport || '-'}</td>
+                            <td>${passenger.gender || '-'}</td>
+                            <td>${passenger.birthday ? formatDate(passenger.birthday) : '-'}</td>
+                            <td>${department.name || '-'}</td>
+                            <td>${passenger.position || '-'}</td>
+                            <td>${passenger.zayavkadate ? formatDate(passenger.zayavkadate) : '-'}</td>
+                            <td>${passenger.plannedtransportdate ? formatDate(passenger.plannedtransportdate) : '-'}</td>
+                            <td>${passenger.factdate ? formatDate(passenger.factdate) : '-'}</td>
+                            <td>${flight.route || '-'}</td>
+                            <td>${passenger.trippurpose || '-'}</td>
+                            <td>${passenger.dp || '-'}</td>
+                            <td>${passenger.cargoweight || '-'}</td>
+                            <td>${passenger.notes || '-'}</td>
+                            <td>
+                                <button class="edit" onclick="editPassenger(${passenger.id})">Изменить</button>
+                                <button class="delete" onclick="deletePassenger(${passenger.id})">Удалить</button>
+                            </td>
+                        `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function renderDepartmentTable() {
+            const tbody = document.querySelector('#departmentTable tbody');
+            tbody.innerHTML = '';
+
+            departments.forEach(dept => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                            <td>${dept.name || '-'}</td>
+                            <td>${dept.organization || '-'}</td>
+                            <td>${dept.phone || '-'}</td>
+                            <td>
+                                <button class="edit" onclick="editDepartment(${dept.id})">Изменить</button>
+                                <button class="delete" onclick="deleteDepartment(${dept.id})">Удалить</button>
+                            </td>
+                        `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function renderFlightTable() {
+            const tbody = document.querySelector('#flightTable tbody');
+            tbody.innerHTML = '';
+
+            flights.forEach(flight => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                            <td>${flight.route || '-'}</td>
+                            <td>${flight.aircrafttype || '-'}</td>
+                            <td>
+                                <button class="edit" onclick="editFlight(${flight.id})">Изменить</button>
+                                <button class="delete" onclick="deleteFlight(${flight.id})">Удалить</button>
+                            </td>
+                        `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function searchTable(tableType) {
+            const searchTerm = document.getElementById(`search${capitalizeFirstLetter(tableType)}`).value.toLowerCase();
+            const rows = document.querySelectorAll(`#${tableType}Table tbody tr`);
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        function sortTable(tableType, columnName) {
+            document.querySelectorAll('.sortable-header').forEach(header => {
+                header.classList.remove('asc', 'desc');
+            });
+
+            const header = event.target;
+            if (currentSortColumn === columnName) {
+                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortColumn = columnName;
+                currentSortDirection = 'asc';
+            }
+
+            header.classList.add(currentSortDirection);
+
+            let dataToSort;
+            if (tableType === 'passenger') {
+                dataToSort = passengers;
+            } else if (tableType === 'department') {
+                dataToSort = departments;
+            } else if (tableType === 'flight') {
+                dataToSort = flights;
+            }
+
+            dataToSort.sort((a, b) => {
+                let valueA = a[columnName];
+                let valueB = b[columnName];
+
+                if (columnName.includes('date') || columnName === 'birthday') {
+                    valueA = new Date(valueA || 0);
+                    valueB = new Date(valueB || 0);
+                }
+
+                if (columnName === 'departmentid') {
+                    const deptA = departments.find(d => d.id === a.departmentid);
+                    const deptB = departments.find(d => d.id === b.departmentid);
+                    valueA = deptA ? deptA.name : '';
+                    valueB = deptB ? deptB.name : '';
+                }
+
+                if (columnName === 'flightid') {
+                    const flightA = flights.find(f => f.id === a.flightid);
+                    const flightB = flights.find(f => f.id === b.flightid);
+                    valueA = flightA ? flightA.route : '';
+                    valueB = flightB ? flightB.route : '';
+                }
+
+                if (valueA === null || valueA === undefined) valueA = '';
+                if (valueB === null || valueB === undefined) valueB = '';
+
+                if (valueA < valueB) {
+                    return currentSortDirection === 'asc' ? -1 : 1;
+                }
+                if (valueA > valueB) {
+                    return currentSortDirection === 'asc' ? 1 : -1;
+                }
+                return 0;
+            });
+
+            if (tableType === 'passenger') {
+                renderPassengerTable();
+            } else if (tableType === 'department') {
+                renderDepartmentTable();
+            } else if (tableType === 'flight') {
+                renderFlightTable();
+            }
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU');
+        }
+
+        function showLoading(show, error = null) {
+            const loaders = document.querySelectorAll('.loading');
+            loaders.forEach(loader => {
+                loader.style.display = show ? 'block' : 'none';
+                if (error) loader.textContent = `Ошибка: ${error}`;
+            });
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            currentEditId = null;
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function showAddPassengerModal() {
+            currentEditId = null;
+            document.getElementById('passengerModalTitle').textContent = 'Добавить пассажира';
+            document.getElementById('savePassengerBtn').textContent = 'Добавить';
+
+            document.getElementById('passengerForm').reset();
+
+            const deptSelect = document.getElementById('departmentid');
+            deptSelect.innerHTML = '<option value="">Выберите отдел</option>';
+            departments.forEach(dept => {
+                deptSelect.innerHTML += `<option value="${dept.id}">${dept.name}</option>`;
+            });
+
+            const flightSelect = document.getElementById('flightid');
+            flightSelect.innerHTML = '<option value="">Выберите рейс</option>';
+            flights.forEach(flight => {
+                flightSelect.innerHTML += `<option value="${flight.id}">${flight.route} (${flight.aircrafttype})</option>`;
+            });
+
+            openModal('passengerModal');
+        }
+
+        async function editPassenger(id) {
+            try {
+                const passenger = passengers.find(p => p.id === id);
+                if (!passenger) {
+                    alert('Пассажир не найден');
+                    return;
+                }
+
+                currentEditId = id;
+                document.getElementById('passengerModalTitle').textContent = 'Редактировать пассажира';
+                document.getElementById('savePassengerBtn').textContent = 'Сохранить';
+
+                const formatDateForInput = (dateString) => {
+                    if (!dateString) return '';
+                    try {
+                        if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+                            return dateString;
+                        }
+                        // Для объектов DateOnly из C#
+                        const date = new Date(dateString);
+                        if (isNaN(date.getTime())) return '';
+                        return date.toISOString().split('T')[0];
+                    } catch {
+                        return '';
+                    }
+                };
+
+                // Заполнение формы
+                document.getElementById('fullname').value = passenger.fullname || '';
+                document.getElementById('passport').value = passenger.passport || '';
+                document.getElementById('birthday').value = formatDateForInput(passenger.birthday);
+                document.getElementById('gender').value = passenger.gender || 'Мужской';
+                document.getElementById('position').value = passenger.position || '';
+                document.getElementById('trippurpose').value = passenger.trippurpose || '';
+                document.getElementById('plannedtransportdate').value = formatDateForInput(passenger.plannedtransportdate);
+                document.getElementById('zayavkadate').value = formatDateForInput(passenger.zayavkadate);
+                document.getElementById('factdate').value = formatDateForInput(passenger.factdate);
+                document.getElementById('zayavkanumber').value = passenger.zayavkanumber || '';
+                document.getElementById('dp').value = passenger.dp || 'C';
+                document.getElementById('cargoweight').value = passenger.cargoweight || '';
+                document.getElementById('notes').value = passenger.notes || '';
+
+                // Заполнение выпадающих списков
+                const deptSelect = document.getElementById('departmentid');
+                deptSelect.innerHTML = '<option value="">Выберите отдел</option>';
+                departments.forEach(dept => {
+                    deptSelect.innerHTML += `<option value="${dept.id}" ${dept.id === passenger.departmentid ? 'selected' : ''}>${dept.name}</option>`;
+                });
+
+                const flightSelect = document.getElementById('flightid');
+                flightSelect.innerHTML = '<option value="">Выберите рейс</option>';
+                flights.forEach(flight => {
+                    flightSelect.innerHTML += `<option value="${flight.id}" ${flight.id === passenger.flightid ? 'selected' : ''}>${flight.route} (${flight.aircrafttype})</option>`;
+                });
+
+                openModal('passengerModal');
+            } catch (error) {
+                console.error('Ошибка при редактировании пассажира:', error);
+                alert('Произошла ошибка при загрузке данных пассажира');
+            }
+        }
+        
+        async function savePassenger() {
+            try {
+                const formatDateForApi = (dateString) => {
+                    if (!dateString) return null;
+                    try {
+                        const date = new Date(dateString);
+                        if (isNaN(date.getTime())) return null;
+                        return date.toISOString().split('T')[0]; // Формат YYYY-MM-DD
+                    } catch {
+                        return null;
+                    }
+                };
+
+                const passengerData = {
+                    id: currentEditId || undefined,
+                    fullname: document.getElementById('fullname').value.trim(),
+                    passport: document.getElementById('passport').value.trim(),
+                    birthday: formatDateForApi(document.getElementById('birthday').value),
+                    gender: document.getElementById('gender').value,
+                    position: document.getElementById('position').value.trim(),
+                    departmentid: parseInt(document.getElementById('departmentid').value),
+                    flightid: parseInt(document.getElementById('flightid').value),
+                    trippurpose: document.getElementById('trippurpose').value,
+                    plannedtransportdate: formatDateForApi(document.getElementById('plannedtransportdate').value),
+                    zayavkadate: formatDateForApi(document.getElementById('zayavkadate').value),
+                    factdate: formatDateForApi(document.getElementById('factdate').value),
+                    zayavkanumber: parseInt(document.getElementById('zayavkanumber').value) || 0,
+                    dp: document.getElementById('dp').value,
+                    cargoweight: document.getElementById('cargoweight').value
+                        ? parseFloat(document.getElementById('cargoweight').value)
+                        : null,
+                    notes: document.getElementById('notes').value.trim()
+                };
+
+
+                
+                const isEdit = currentEditId !== null;
+                const url = `/api/passenger${isEdit ? `/${currentEditId}` : ''}`;
+                const method = isEdit ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(passengerData)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `HTTP ошибка: ${response.status}`);
+                }
+
+                closeModal('passengerModal');
+                await loadAllData();
+                alert(`Пассажир успешно ${isEdit ? 'обновлён' : 'добавлен'}!`);
+            } catch (error) {
+                console.error('Ошибка сохранения:', error);
+                alert(`Ошибка: ${error.message}\nПроверьте консоль для деталей`);
+            }
+        }
+        async function deletePassenger(id) {
+
+            const passenger = passengers.find(p => p.id === id);
+            if (!passenger) {
+                alert('Пассажир не найден');
+                return;
+            }
+
+            const department = departments.find(d => d.id === passenger.departmentid);
+            const flight = flights.find(f => f.id === passenger.flightid);
+
+            let message = `Удалить пассажира:\n`;
+            message += `ФИО: ${passenger.fullname || 'Не указано'}\n`;
+            message += `Паспорт: ${passenger.passport || 'Не указан'}\n`;
+
+            if (department) {
+                message += `Отдел: ${department.name}\n`;
+            }
+
+            if (passenger.position) {
+                message += `Статус: ${passenger.position}\n`;
+            }
+
+            if (flight) {
+                message += `Рейс: ${flight.route}\n`;
+            }
+
+            message += `\nВы уверены, что хотите удалить эту запись?`;
+
+            if (!confirm(message)) return;
+
+            try {
+                showLoading(true);
+
+                const response = await fetch(`/api/passenger/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `Ошибка удаления (${response.status})`);
+                }
+
+                await loadAllData();
+
+                showLoading(false);
+
+                alert(`Пассажир "${passenger.fullname}" успешно удален!`);
+
+            } catch (error) {
+                console.error('Ошибка удаления пассажира:', error);
+                showLoading(false);
+
+                let errorMessage = 'Произошла ошибка при удалении пассажира';
+
+                if (error.message.includes('404') || error.message.includes('not found')) {
+                    errorMessage = 'Пассажир не найден. Возможно, он уже был удален.';
+                } else if (error.message.includes('foreign key') || error.message.includes('constraint')) {
+                    errorMessage = 'Невозможно удалить пассажира из-за связанных данных в системе.';
+                } else if (error.message.includes('500') || error.message.includes('server error')) {
+                    errorMessage = 'Ошибка сервера при удалении. Попробуйте позже.';
+                }
+
+                alert(errorMessage);
+            }
+        }
+
+        function showAddDepartmentModal() {
+            currentEditId = null;
+            document.getElementById('departmentModalTitle').textContent = 'Добавить отдел';
+            document.getElementById('saveDepartmentBtn').textContent = 'Добавить';
+            document.getElementById('departmentForm').reset();
+            openModal('departmentModal');
+        }
+
+        async function editDepartment(id) {
+            const department = departments.find(d => d.id === id);
+            if (!department) return;
+
+            currentEditId = id;
+            document.getElementById('departmentModalTitle').textContent = 'Редактировать отдел';
+            document.getElementById('saveDepartmentBtn').textContent = 'Сохранить';
+
+            document.getElementById('deptName').value = department.name || '';
+            document.getElementById('deptOrganization').value = department.organization || '';
+            document.getElementById('deptPhone').value = department.phone || '';
+
+            openModal('departmentModal');
+        }
+
+        async function saveDepartment() {
+            const name = document.getElementById('deptName').value.trim();
+            const organization = document.getElementById('deptOrganization').value.trim();
+            const phone = document.getElementById('deptPhone').value.trim();
+
+            if (!name) {
+                alert('Укажите название отдела');
+                return;
+            }
+
+            const duplicate = departments.find(dept => {
+
+                if (currentEditId && dept.id === currentEditId) return false;
+                return dept.name.toLowerCase() === name.toLowerCase();
+            });
+
+            if (duplicate) {
+                alert(`Отдел "${duplicate.name}" уже существует`);
+                return;
+            }
+
+            const departmentData = {
+                name: name,
+                organization: organization || "",
+                phone: phone || "" 
+            };
+
+            try {
+                let response;
+                if (currentEditId) {
+                    departmentData.id = currentEditId;
+                    response = await fetch(`/api/department/${currentEditId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(departmentData)
+                    });
+                } else {
+                    response = await fetch('/api/department', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(departmentData)
+                    });
+                }
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Ошибка сохранения: ${errorText}`);
+                }
+
+                closeModal('departmentModal');
+                await loadAllData();
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert(`Ошибка при сохранении: ${error.message}`);
+            }
+        }
+        async function deleteDepartment(id) {
+
+            const department = departments.find(d => d.id === id);
+            if (!department) {
+                alert('Отдел не найден');
+                return;
+            }
+
+
+            if (!confirm(`Удалить отдел "${department.name}"?`)) return;
+
+            try {
+
+                const departmentHasPassengers = passengers.some(p => p.departmentid === id);
+
+                if (departmentHasPassengers) {
+
+                    const passengerCount = passengers.filter(p => p.departmentid === id).length;
+
+                    if (!confirm(`В отделе "${department.name}" зарегистрировано ${passengerCount} пассажиров.\n\nУдаление отдела может повлиять на эти записи. Продолжить?`)) {
+                        return;
+                    }
+                }
+
+                const response = await fetch(`/api/department/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Ошибка удаления');
+                }
+
+                await loadAllData();
+                alert(`Отдел "${department.name}" успешно удален!`);
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+
+
+                let errorMessage = 'Произошла ошибка при удалении отдела';
+
+                if (error.message.includes('foreign key') || error.message.includes('constraint')) {
+                    errorMessage = 'Невозможно удалить отдел, так как в нем зарегистрированы пассажиры.\nСначала удалите или переназначьте пассажиров.';
+                } else if (error.message.includes('404')) {
+                    errorMessage = 'Отдел не найден. Возможно, он уже был удален.';
+                }
+
+                alert(errorMessage);
+            }
+        }
+
+        function showAddFlightModal() {
+            currentEditId = null;
+            document.getElementById('flightModalTitle').textContent = 'Добавить рейс';
+            document.getElementById('saveFlightBtn').textContent = 'Добавить';
+            document.getElementById('flightForm').reset();
+            openModal('flightModal');
+        }
+
+        async function editFlight(id) {
+            const flight = flights.find(f => f.id === id);
+            if (!flight) return;
+
+            currentEditId = id;
+            document.getElementById('flightModalTitle').textContent = 'Редактировать рейс';
+            document.getElementById('saveFlightBtn').textContent = 'Сохранить';
+
+            document.getElementById('route').value = flight.route || '';
+            document.getElementById('aircrafttype').value = flight.aircrafttype || '';
+
+            openModal('flightModal');
+        }
+
+        async function saveFlight() {
+            const route = document.getElementById('route').value.trim();
+            const aircrafttype = document.getElementById('aircrafttype').value.trim();
+
+            if (!route) {
+                alert('Укажите маршрут');
+                return;
+            }
+
+            if (!aircrafttype) {
+                alert('Укажите тип ВС');
+                return;
+            }
+
+            const duplicate = flights.find(flight => {
+
+                if (currentEditId && flight.id === currentEditId) return false;
+                return flight.route.toLowerCase() === route.toLowerCase();
+            });
+
+            if (duplicate) {
+                alert(`Рейс с маршрутом "${duplicate.route}" уже существует.\nТекущий тип ВС: ${duplicate.aircrafttype}`);
+                return;
+            }
+
+            const flightData = {
+                route: route,
+                aircrafttype: aircrafttype
+            };
+
+            try {
+                let response;
+                if (currentEditId) {
+                    flightData.id = currentEditId;
+                    response = await fetch(`/api/flight/${currentEditId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(flightData)
+                    });
+                } else {
+                    response = await fetch('/api/flight', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(flightData)
+                    });
+                }
+
+                if (!response.ok) throw new Error('Ошибка сохранения');
+
+                closeModal('flightModal');
+                await loadAllData();
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка при сохранении');
+            }
+        }
+
+        async function deleteFlight(id) {
+            if (!confirm('Вы уверены, что хотите удалить этот рейс?')) return;
+
+            try {
+                const flightHasPassengers = passengers.some(p => p.flightid === id);
+
+                if (flightHasPassengers) {
+                    if (!confirm('На этом рейсе есть пассажиры. Удаление рейса приведет к удалению связанных записей. Продолжить?')) {
+                        return;
+                    }
+                }
+
+                const response = await fetch(`/api/flight/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Ошибка удаления');
+                }
+
+                await loadAllData();
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при удалении рейса');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAllData);
+    </script>
+</body>
+</html>
