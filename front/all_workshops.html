@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>список цехов</title>
+    <title>Список всех цехов</title>
     <link rel="icon" href="/pictures/Комфорт.ico" type="image/x-icon">
-            <style>
-        .card {
+    <img src="/pictures/Комфорт.png" style="height:200px;width:auto">
+    <style>
+                .card {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
@@ -24,21 +25,20 @@
     </style>
 </head>
 <body>
-    <img src="/pictures/Комфорт.png" style="height:200px;width:auto">
-    <h1>список цехов</h1>
+    <h1>Список всех цехов</h1>
     <button onclick="window.location.assign('/')">назад к товарам</button>
     
-    <div class="card">
+    <div class = "card" >
         {% if data %}
             {% for w in data %}
-            <div style="border:2px solid black;margin:2%;padding:10px">
-                <p>название цеха: {{w.workshop_name or '-'}}</p>
-                <p>часов: {{ "%.1f"|format(w.make_time|float) }} ч.</p>
-                <p>количество работников: {{w.population or '-'}}</p>
+            <div style="border:1px solid black; margin:10px; padding:10px;">
+                <p><strong>название цеха:</strong> {{ w.workshop_name }}</p>
+                <p><strong>тип цеха:</strong> {{ w.workshop_type }}</p>
+                <p><strong>количество работников:</strong> {{ w.population }}</p>
             </div>
             {% endfor %}
         {% else %}
-            <p>цехи не найдены</p>
+            <p>цеха не найдены</p>
         {% endif %}
     </div>
 </body>

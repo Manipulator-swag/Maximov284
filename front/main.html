@@ -3,24 +3,66 @@
 <head>
     <title>список товаров</title>
     <link rel="icon" href="/pictures/Комфорт.ico" type="image/x-icon">
+    <style>
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .product-card {
+            border: 2px solid black;
+            padding: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            height: 200px;
+            width: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-    <img src="/pictures/Комфорт.png" style="height:200px;width:auto">
-    <h1>список продуктов</h1>
-    <button onclick="window.location.assign('/add_product')">добавить товар</button>
+    <img src="/pictures/Комфорт.png" alt="Логотип">
+    <h1>список товаров</h1>
     
-    <div>
+    <div class="button-container">
+        <div class="button-group">
+            <button onclick="window.location.assign('/add_product')">добавить товар</button>
+            <button class="workshops-btn" onclick="window.location.assign('/all_workshops')">все цеха</button>
+        </div>
+    </div>
+    
+    <div class="products-grid">
         {% if data and data.products %}
             {% for p in data.products %}
-            <div style="border:2px solid black;margin:2%;padding:10px">
-                <p>тип: {{p.product_type or '-'}} | название: {{p.product_name or '-'}}</p>
+            <div class="product-card">
+                <p><strong>{{p.product_type or '-'}}:</strong> {{p.product_name or '-'}}</p>
                 <p>артикул: {{p.articul or '-'}}</p>
-                <p>цена: {{ "%.2f"|format(p.min_cost_for_partner|float) }}</p>
+                <p>цена: {{ "%.2f"|format(p.min_cost_for_partner|float) }} ₽</p>
                 <p>материал: {{p.main_material or '-'}}</p>
                 <p>часов: {{ "%.1f"|format(p.making_time|float) }} ч.</p>
-                <a href="/update_product/{{p.product_id}}">изменить</a>
-                <a href="/workshops/{{p.product_id}}">цеха</a>
-                <a href="/delete_product/{{p.product_id}}" style="color:red" onclick="return confirm('удалить товар?')">удалить</a>
+                <p>
+                    <a href="/update_product/{{p.product_id}}">изменить</a> | 
+                    <a href="/workshops/{{p.product_id}}">цеха, производящие товар</a> | 
+                    <a href="/delete_product/{{p.product_id}}" style="color:red" onclick="return confirm('удалить товар?')">удалить</a>
+                </p>
             </div>
             {% endfor %}
         {% else %}

@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from database import get_db
-from models import product_workshops, products, product_types, material_type
+from models import product_workshops, products, product_types, material_type, workshop
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
 
@@ -78,9 +78,28 @@ def get_workshops(product_id:int, request:Request, db:Session=Depends(get_db)):
         context={"data":data}
     )
 
+
+@app.get('/all_workshops')
+def get_all_workshops(request: Request, db: Session = Depends(get_db)):
+
+    workshops_list = db.query(workshop).all()
+    
+    data = []
+    for w in workshops_list:
+        data.append({
+            "workshop_name": w.workshop_name,
+            "workshop_type": w.workshop_type,
+            "population": w.population
+        })
+    
+    return templates.TemplateResponse(
+        request=request,
+        name='all_workshops.html',
+        context={"data": data}
+    )
+
 @app.get('/add_product')
 def add_product_get(request: Request, db: Session = Depends(get_db)):
-    # Исправлено: запрашиваем из product_types, а не из products
     product_types_data = db.query(product_types).all() 
     material_types_data = db.query(material_type).all()  
 
@@ -95,6 +114,8 @@ def add_product_get(request: Request, db: Session = Depends(get_db)):
             "material_types": material_types_list
         }
     )
+
+
 @app.post('/add_product')
 def add_product_post(request: Request, product_request: add_product = Form(), db: Session = Depends(get_db)):
     try:
